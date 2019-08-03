@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Hexo</title>
+  <title>Andorid内存管理原理 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="简介Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Andorid内存管理原理">
+<meta property="og:url" content="http://yoursite.com/2019/08/03/Android内存管理原理/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简介Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-03T03:50:54.705Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="Andorid内存管理原理">
+<meta name="twitter:description" content="简介Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,103 +154,170 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Android内存管理原理" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/03/UI性能优化/" class="archive-article-date">
-  	<time datetime="2019-08-03T03:56:46.828Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/03/UI性能优化/">AndroidUI性能优化</a>
+    <h1 class="article-title" itemprop="name">
+      Andorid内存管理原理
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/03/Android内存管理原理/" class="archive-article-date">
+        
+        <a href="/2019/08/03/Android内存管理原理/" class="archive-article-date">
   	<time datetime="2019-08-03T03:20:05.682Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-03</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/03/Android内存管理原理/">Andorid内存管理原理</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><pre><code>Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理</code></pre><a id="more"></a>
+<h2 id="Linux进程回收"><a href="#Linux进程回收" class="headerlink" title="Linux进程回收"></a>Linux进程回收</h2><pre><code>大部分应用程序都运行在独立的Linux进程中(dvm及dalvik,每一个应用都有自己的dvm，而每一个dvm都是Linux中的一个进程(一个Linux只有一个dvm)),每个进程都有独立的内存空间，随着应用的不断开启，系统内存就越来越小，为了新的应用能运行，系统就需要一套杀死限制进程的机制
+FrameWork并不能直接回收内存，其管理程序的服务ActivityMangerServic也在虚拟机中运行，虚拟机都在自己的独立内存空间，所有它没有办法感知程序是否OOM
+Android系统中还运行了一个OOM进程，在进程启动时，会把自己在Linux中注册为一个OOM Killer，Ams会把所有的应用程序的oom adj值给oom killer，这个值从 -16-15，越来越不重要，当内核的内存管理模块检测到内存不足的时候，就通知oom killer，根据值来回收内存，强制退出优先级低的程序。</code></pre><h2 id="Activity在内存中的状态"><a href="#Activity在内存中的状态" class="headerlink" title="Activity在内存中的状态"></a>Activity在内存中的状态</h2><pre><code>系统只有一个Activity与用户交互状态，不在交互状态，AMS在内部会缓存，后台activity存在个数超过一定值，就会杀死优先级低Activity。
+每一个应用程序都对应的一个ActivityThread类，初始化后就进入Looper.loop()进行死循环，有消息就处理消息，没有消息就会进入sleep状态。</code></pre><h2 id="Android内存回收"><a href="#Android内存回收" class="headerlink" title="Android内存回收"></a>Android内存回收</h2><pre><code>Activity所占内存一般不会被回收，只有在系统内存不够才会回收，并且要遵循一定规则，大致是前台最后回收，其次是前台的sevice或provider，然后是后台Activity，然后是空进程</code></pre><h2 id="内存释放的情况"><a href="#内存释放的情况" class="headerlink" title="内存释放的情况"></a>内存释放的情况</h2><pre><code>1.系统内存不足时，会回收，当前没有Activity的进程，和没有Activity在前台的进程
+2.在oom killer杀死优先级最低的
+3.Ams认为目标需要被杀死时，会通知目标进程，进程内存释放，调用目标进程的scheduleLowMemory()方法和ProcessInBackground()方法</code></pre>
+      
 
-        <div class="article-info info-on-right">
-          
-          
-
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/03/Android内存管理原理/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/03/AndroidUI性能优化/" class="archive-article-date">
-  	<time datetime="2019-08-03T02:51:05.057Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-03</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/08/03/UI性能优化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          AndroidUI性能优化
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/08/03/AndroidUI性能优化/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">AndroidUI性能优化</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/03/AndroidUI性能优化/">AndroidUI性能优化</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -269,8 +340,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
