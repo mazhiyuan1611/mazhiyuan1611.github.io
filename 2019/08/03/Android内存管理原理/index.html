@@ -8,19 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Andorid内存管理原理 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简介Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理">
+  <meta name="description" content="简介 Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Andorid内存管理原理">
 <meta property="og:url" content="http://yoursite.com/2019/08/03/Android内存管理原理/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="简介Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理">
+<meta property="og:description" content="简介 Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/08/03/Android内存管理原理/1.png">
-<meta property="og:updated_time" content="2019-08-06T03:52:39.333Z">
+<meta property="og:updated_time" content="2019-08-06T06:11:54.786Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Andorid内存管理原理">
-<meta name="twitter:description" content="简介Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理">
-<meta name="twitter:image" content="http://yoursite.com/2019/08/03/Android内存管理原理/1.png">
+<meta name="twitter:description" content="简介 Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -176,21 +174,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><pre><code>Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理</code></pre><a id="more"></a>
-<h2 id="Linux进程回收"><a href="#Linux进程回收" class="headerlink" title="Linux进程回收"></a>Linux进程回收</h2><pre><code>大部分应用程序都运行在独立的Linux进程中(dvm及dalvik,每一个应用都有自己的dvm，而每一个dvm都是Linux中的一个进程(一个Linux只有一个dvm)),每个进程都有独立的内存空间，随着应用的不断开启，系统内存就越来越小，为了新的应用能运行，系统就需要一套杀死限制进程的机制
-FrameWork并不能直接回收内存，其管理程序的服务ActivityMangerServic也在虚拟机中运行，虚拟机都在自己的独立内存空间，所有它没有办法感知程序是否OOM
-Android系统中还运行了一个OOM进程，在进程启动时，会把自己在Linux中注册为一个OOM Killer，Ams会把所有的应用程序的oom adj值给oom killer，这个值从 -16-15，越来越不重要，当内核的内存管理模块检测到内存不足的时候，就通知oom killer，根据值来回收内存，强制退出优先级低的程序。</code></pre><h2 id="Activity在内存中的状态"><a href="#Activity在内存中的状态" class="headerlink" title="Activity在内存中的状态"></a>Activity在内存中的状态</h2><pre><code>系统只有一个Activity与用户交互状态，不在交互状态，AMS在内部会缓存，后台activity存在个数超过一定值，就会杀死优先级低Activity。
-每一个应用程序都对应的一个ActivityThread类，初始化后就进入Looper.loop()进行死循环，有消息就处理消息，没有消息就会进入sleep状态。</code></pre><h2 id="Android内存回收"><a href="#Android内存回收" class="headerlink" title="Android内存回收"></a>Android内存回收</h2><pre><code>Activity所占内存一般不会被回收，只有在系统内存不够才会回收，并且要遵循一定规则，大致是前台最后回收，其次是前台的sevice或provider，然后是后台Activity，然后是空进程</code></pre><h2 id="内存释放的情况"><a href="#内存释放的情况" class="headerlink" title="内存释放的情况"></a>内存释放的情况</h2><pre><code>1.系统内存不足时，会回收，当前没有Activity的进程，和没有Activity在前台的进程
-2.在oom killer杀死优先级最低的
-3.Ams认为目标需要被杀死时，会通知目标进程，进程内存释放，调用目标进程的scheduleLowMemory()方法和ProcessInBackground()方法</code></pre><h2 id="内存优化"><a href="#内存优化" class="headerlink" title="内存优化"></a>内存优化</h2><h5 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h5><ol>
-<li><p>集合类泄露：集合类添加元素，仍引用着元素对象，使其无法回收，清空集合，置空</p>
-</li>
-<li><p>单例/静态变量造成内存泄露：当我们在Activity里面使用这个的时候，把我们的Activity的context传进去，那么，这个单例就持有这个Activity的引用，当这个Activtiy没有用了，需要销毁，因为这个单例还持有Activity的引用，所有无法GC回收，所以就出现了内存泄露，也就是生命周期长的持有了生命周期短的引用，造成了内存泄露。解决方案<br><img src="1.png" alt></p>
-</li>
-<li><p>匿名内部类/非静态内部类：共同点:都会持有外部类强引用，一个将引用设置为弱引用，一个改为静态类   </p>
-</li>
-<li><p>资源未关闭造成的内存泄露：</p>
-<ol>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ol>
+<li>Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理<a id="more"></a>
+<h2 id="Linux进程回收"><a href="#Linux进程回收" class="headerlink" title="Linux进程回收"></a>Linux进程回收</h2></li>
+<li>大部分应用程序都运行在独立的Linux进程中(dvm及dalvik,每一个应用都有自己的dvm，而每一个dvm都是Linux中的一个进程(一个Linux只有一个dvm)),每个进程都有独立的内存空间，随着应用的不断开启，系统内存就越来越小，为了新的应用能运行，系统就需要一套杀死限制进程的机制</li>
+<li>FrameWork并不能直接回收内存，其管理程序的服务ActivityMangerServic也在虚拟机中运行，虚拟机都在自己的独立内存空间，所有它没有办法感知程序是否OOM</li>
+<li>Android系统中还运行了一个OOM进程，在进程启动时，会把自己在Linux中注册为一个OOM Killer，Ams会把所有的应用程序的oom adj值给oom killer，这个值从 -16-15，越来越不重要，当内核的内存管理模块检测到内存不足的时候，就通知oom killer，根据值来回收内存，强制退出优先级低的程序。<h2 id="Activity在内存中的状态"><a href="#Activity在内存中的状态" class="headerlink" title="Activity在内存中的状态"></a>Activity在内存中的状态</h2></li>
+<li>系统只有一个Activity与用户交互状态，不在交互状态，AMS在内部会缓存，后台activity存在个数超过一定值，就会杀死优先级低Activity。</li>
+<li>每一个应用程序都对应的一个ActivityThread类，初始化后就进入Looper.loop()进行死循环，有消息就处理消息，没有消息就会进入sleep状态。<h2 id="Android内存回收"><a href="#Android内存回收" class="headerlink" title="Android内存回收"></a>Android内存回收</h2></li>
+<li>Activity所占内存一般不会被回收，只有在系统内存不够才会回收，并且要遵循一定规则，大致是前台最后回收，其次是前台的sevice或provider，然后是后台Activity，然后是空进程<h2 id="内存释放的情况"><a href="#内存释放的情况" class="headerlink" title="内存释放的情况"></a>内存释放的情况</h2></li>
+<li>系统内存不足时，会回收，当前没有Activity的进程，和没有Activity在前台的进程</li>
+<li>在oom killer杀死优先级最低的</li>
+<li>Ams认为目标需要被杀死时，会通知目标进程，进程内存释放，调用目标进程的scheduleLowMemory()方法和ProcessInBackground()方法<h2 id="内存优化"><a href="#内存优化" class="headerlink" title="内存优化"></a>内存优化</h2><h5 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h5></li>
+<li>集合类泄露：集合类添加元素，仍引用着元素对象，使其无法回收，清空集合，置空</li>
+<li>单例/静态变量造成内存泄露：当我们在Activity里面使用这个的时候，把我们的Activity的context传进去，那么，这个单例就持有这个Activity的引用，当这个Activtiy没有用了，需要销毁，因为这个单例还持有Activity的引用，所有无法GC回收，所以就出现了内存泄露，也就是生命周期长的持有了生命周期短的引用，造成了内存泄露。解决方案</li>
+<li>匿名内部类/非静态内部类：共同点:都会持有外部类强引用，一个将引用设置为弱引用，一个改为静态类   </li>
+<li>资源未关闭造成的内存泄露：<ol>
 <li>网络、文件等流忘关闭</li>
 <li>手动注册广播时，退出时忘记取消注册</li>
 <li>Service忘记stopself()</li>
