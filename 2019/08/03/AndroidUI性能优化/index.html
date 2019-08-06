@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="原理:Android 16sm原则,每16ms就会发出VSYNC信号用来更新页面,Android刷新率60FPS，平均16ms一帧，若果你的页面更新需要大于16ms，那么就需要在下个16ms节点来重绘，这就会造成卡帧">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-03T03:19:12.826Z">
+<meta property="og:updated_time" content="2019-08-06T03:52:43.624Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AndroidUI性能优化">
 <meta name="twitter:description" content="原理:Android 16sm原则,每16ms就会发出VSYNC信号用来更新页面,Android刷新率60FPS，平均16ms一帧，若果你的页面更新需要大于16ms，那么就需要在下个16ms节点来重绘，这就会造成卡帧">
@@ -176,7 +176,16 @@
       
         <h2 id="原理"><a href="#原理" class="headerlink" title="原理:"></a>原理:</h2><pre><code>Android 16sm原则,每16ms就会发出VSYNC信号用来更新页面,Android刷新率60FPS，平均16ms一帧，若果你的页面更新需要大于16ms，那么就需要在下个16ms节点来重绘，这就会造成卡帧</code></pre><a id="more"></a>
 <h2 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h2><pre><code>App每一个View都会通过OnMeaure，onLayout，ondraw对View进行渲染,meaure需要从顶部节点，顺着layout树形结构依次向下测量每个View的大小，每个子节点都需要想父节点提交自己测量的大小，遇到冲突，父节点会强制子节点重新meaure时间会增长到2-3倍，相对布局，经常meaure俩次才能合理布局，线性布局如果有权重也需要俩次，如果他俩被嵌套消耗时间会指从数级增长，所以扁平化得结构最好
-，一点View开始meaure所有View都会被渲染，views越多消耗时间也会越多，Views尽量少，成扁平树形结构，尽量控制在16ms内，</code></pre><h2 id="布局检查："><a href="#布局检查：" class="headerlink" title="布局检查："></a>布局检查：</h2><pre><code>可以用HierarchyView来检查嵌套层数和渲染耗时，帮助发现overdraw（重复绘制）overdraw一个像素点在屏幕只绘制一次，多次绘制，会造成绘制延迟，绘制卡顿，如果View有更新那么之前的View就失效了，View每个像素都需要重新绘制</code></pre>
+，一点View开始meaure所有View都会被渲染，views越多消耗时间也会越多，Views尽量少，成扁平树形结构，尽量控制在16ms内，</code></pre><h2 id="布局检查："><a href="#布局检查：" class="headerlink" title="布局检查："></a>布局检查：</h2><pre><code>可以用HierarchyView来检查嵌套层数和渲染耗时，帮助发现overdraw（重复绘制）overdraw一个像素点在屏幕只绘制一次，多次绘制，会造成绘制延迟，绘制卡顿，如果View有更新那么之前的View就失效了，View每个像素都需要重新绘制</code></pre><h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h5 id="1-0版本"><a href="#1-0版本" class="headerlink" title="1.0版本"></a>1.0版本</h5><ol>
+<li>如果父控件有背景颜色，那么子控件的背景颜色就不要有了，如果子控件             背景覆盖全局，父控件就不要有了</li>
+<li>减少布局的嵌套</li>
+<li>能用帧布局的线性布局就不要用相对布局<h5 id="1-1版本"><a href="#1-1版本" class="headerlink" title="1.1版本"></a>1.1版本</h5></li>
+<li>include 和 merge 增加布局复用，减少层级</li>
+<li>viewstub 按需加载,更加轻便<h5 id="2-0版本"><a href="#2-0版本" class="headerlink" title="2.0版本"></a>2.0版本</h5></li>
+<li>onDraw中不要创建新的布局对象</li>
+<li>onDraw中不要有耗时方法</li>
+</ol>
+
       
 
       
