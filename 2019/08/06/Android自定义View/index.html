@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>Android 自定义View | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title:Android 自定义View自定义View基础分类:实现方式1. 自定义组合控件 2. 继承系统View控件 3. 继承View 4. 继承ViewGroupMeasureSpaceMersureSpace是View的内部类，他封装了一个View的尺寸，在onMeasure当中根据这个MeasureSpace的值来确定View的宽高. MersureSpace的值保存在一个int值">
+  <meta name="description" content="自定义View基础分类:实现方式1. 自定义组合控件 2. 继承系统View控件 3. 继承View 4. 继承ViewGroupMeasureSpaceMersureSpace是View的内部类，他封装了一个View的尺寸，在onMeasure当中根据这个MeasureSpace的值来确定View的宽高. MersureSpace的值保存在一个int值挡中，一个int值有32位，前俩位表示mod">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Android 自定义View">
 <meta property="og:url" content="http://yoursite.com/2019/08/06/Android自定义View/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title:Android 自定义View自定义View基础分类:实现方式1. 自定义组合控件 2. 继承系统View控件 3. 继承View 4. 继承ViewGroupMeasureSpaceMersureSpace是View的内部类，他封装了一个View的尺寸，在onMeasure当中根据这个MeasureSpace的值来确定View的宽高. MersureSpace的值保存在一个int值">
+<meta property="og:description" content="自定义View基础分类:实现方式1. 自定义组合控件 2. 继承系统View控件 3. 继承View 4. 继承ViewGroupMeasureSpaceMersureSpace是View的内部类，他封装了一个View的尺寸，在onMeasure当中根据这个MeasureSpace的值来确定View的宽高. MersureSpace的值保存在一个int值挡中，一个int值有32位，前俩位表示mod">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-06T11:46:27.688Z">
+<meta property="og:updated_time" content="2019-08-07T00:41:15.277Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="title:Android 自定义View自定义View基础分类:实现方式1. 自定义组合控件 2. 继承系统View控件 3. 继承View 4. 继承ViewGroupMeasureSpaceMersureSpace是View的内部类，他封装了一个View的尺寸，在onMeasure当中根据这个MeasureSpace的值来确定View的宽高. MersureSpace的值保存在一个int值">
+<meta name="twitter:title" content="Android 自定义View">
+<meta name="twitter:description" content="自定义View基础分类:实现方式1. 自定义组合控件 2. 继承系统View控件 3. 继承View 4. 继承ViewGroupMeasureSpaceMersureSpace是View的内部类，他封装了一个View的尺寸，在onMeasure当中根据这个MeasureSpace的值来确定View的宽高. MersureSpace的值保存在一个int值挡中，一个int值有32位，前俩位表示mod">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -157,10 +157,24 @@
             <article id="post-Android自定义View" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android 自定义View
+    </h1>
+  
+
+        
+        <a href="/2019/08/06/Android自定义View/" class="archive-article-date">
+  	<time datetime="2019-08-06T11:13:37.800Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-06</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<h2 id="title-Android-自定义View"><a href="#title-Android-自定义View" class="headerlink" title="title:Android 自定义View"></a>title:Android 自定义View</h2><h2 id="自定义View基础"><a href="#自定义View基础" class="headerlink" title="自定义View基础"></a>自定义View基础</h2><h5 id="分类-实现方式"><a href="#分类-实现方式" class="headerlink" title="分类:实现方式"></a>分类:实现方式</h5><pre><code>1. 自定义组合控件
+        <h2 id="自定义View基础"><a href="#自定义View基础" class="headerlink" title="自定义View基础"></a>自定义View基础</h2><h5 id="分类-实现方式"><a href="#分类-实现方式" class="headerlink" title="分类:实现方式"></a>分类:实现方式</h5><pre><code>1. 自定义组合控件
 2. 继承系统View控件
 3. 继承View
 4. 继承ViewGroup</code></pre><h5 id="MeasureSpace"><a href="#MeasureSpace" class="headerlink" title="MeasureSpace"></a>MeasureSpace</h5><pre><code>MersureSpace是View的内部类，他封装了一个View的尺寸，在onMeasure当中根据这个MeasureSpace的值来确定View的宽高.
