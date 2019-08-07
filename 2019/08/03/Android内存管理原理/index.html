@@ -15,10 +15,12 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="简介 Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-07T00:40:25.655Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/03/Android内存管理原理/2019-08-07-08-52-02.png">
+<meta property="og:updated_time" content="2019-08-07T00:52:05.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Andorid内存管理原理">
 <meta name="twitter:description" content="简介 Andorid是基于Linux实现的，管理包含两部分，一部分是FrameWork对内存管理，一部分是Linux是对内存管理">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/03/Android内存管理原理/2019-08-07-08-52-02.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -186,7 +188,7 @@
 <li>系统内存不足时，会回收，当前没有Activity的进程，和没有Activity在前台的进程</li>
 <li>在oom killer杀死优先级最低的</li>
 <li>Ams认为目标需要被杀死时，会通知目标进程，进程内存释放，调用目标进程的scheduleLowMemory()方法和ProcessInBackground()方法<h2 id="内存优化"><a href="#内存优化" class="headerlink" title="内存优化"></a>内存优化</h2><h5 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h5></li>
-<li>集合类泄露：集合类添加元素，仍引用着元素对象，使其无法回收，清空集合，置空</li>
+<li>集合类泄露：集合类添加元素，仍引用着元素对象，使其无法回收，清空集合，置空<br> <img src="2019-08-07-08-52-02.png" alt></li>
 <li>单例/静态变量造成内存泄露：当我们在Activity里面使用这个的时候，把我们的Activity的context传进去，那么，这个单例就持有这个Activity的引用，当这个Activtiy没有用了，需要销毁，因为这个单例还持有Activity的引用，所有无法GC回收，所以就出现了内存泄露，也就是生命周期长的持有了生命周期短的引用，造成了内存泄露。解决方案</li>
 <li>匿名内部类/非静态内部类：共同点:都会持有外部类强引用，一个将引用设置为弱引用，一个改为静态类   </li>
 <li>资源未关闭造成的内存泄露：<ol>
