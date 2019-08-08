@@ -152,6 +152,202 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Android 加密解密" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/08/Android 加密解密/">Android加密解密</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/08/Android 加密解密/" class="archive-article-date">
+  	<time datetime="2019-08-08T12:49:59.028Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="常见加密算法"><a href="#常见加密算法" class="headerlink" title="常见加密算法"></a>常见加密算法</h2><ol>
+<li>MD5信息摘要算法</li>
+<li>SHA安全散列算法</li>
+<li>DES数据加密算法</li>
+<li>RSA非对称加密算法</li>
+<li>SSL https协议<br>MD5 SHA  RSA 非对称加密<br>DES 对称加密<h2 id="META-INFO解析"><a href="#META-INFO解析" class="headerlink" title="META-INFO解析"></a>META-INFO解析</h2>manifest.mf 摘要文件  程序遍历APK包中所有的文件，对非文件夹、非签名的文件，逐个用SHA1生成摘要，再用Base64编码。若果你改变了apk包中文件，在安装校验时，改变后的文件摘要信息与manifest.mf的校验信息不用，就不能安装<br>说明：如果攻击者修改了程序的内容，有重新生成了新的摘要，那么就可以通过验证；</li>
+</ol>
+<p>cert.sf 对摘要的签名文件  对前一步生成的manifest.mf，使用sha1-rsa算法，用开发者的私钥进行签名，在安装时只有使用公钥才能解密，解密后与未加密的摘要信息进行对比，如果相符，则没有修改；<br>说明: 在这一步，即使开发者修改了程序内容，并生成了新的摘要文件，但是攻击者没有开发者的私钥，所以不能生成正确的签名文件（CERT.SF）。系统在对程序进行验证的时候，用开发者公钥对不正确的签名文件进行解密，得到的结果和摘要文件（MANIFEST.MF）对应不起来，所以不能通过检验，不能成功安装文件。</p>
+<p>cert.rsa 文件保存了公钥所采用的的加密算法等信息<br>说明：系统对签名文件进行解密，所需要的公钥就是从这个文件里取出来的。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/08/Android 加密解密/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Android Service" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/08/Android Service/">Android Service</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/08/Android Service/" class="archive-article-date">
+  	<time datetime="2019-08-08T12:45:15.963Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/08/Android Service/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Android Activity" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/08/Android Activity/">Android Activity</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/08/Android Activity/" class="archive-article-date">
+  	<time datetime="2019-08-08T12:31:33.017Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Android中Activity是如何启动的？"><a href="#Android中Activity是如何启动的？" class="headerlink" title="Android中Activity是如何启动的？"></a>Android中Activity是如何启动的？</h2><p> 用户在Laucher程序里点击应用图标时，会通知AMS(ActivityMangerService)启动应用的入口Activity，AMS发现这个应用未启动，则会通知zygote孵化出应用进程，然后在这个<br> 应用进程里执行ActivtiyThread的main方法。再该方法里会先准备好Looper和消息队列，然后调用attach方法将应用进程绑定到AMS，然后进入loop循环，不断从队列里读取消息</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/08/Android Activity/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Android冷启动" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
