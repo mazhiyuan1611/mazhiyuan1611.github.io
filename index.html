@@ -172,16 +172,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="常见加密算法"><a href="#常见加密算法" class="headerlink" title="常见加密算法"></a>常见加密算法</h2><ol>
-<li>MD5信息摘要算法</li>
-<li>SHA安全散列算法</li>
-<li>DES数据加密算法</li>
-<li>RSA非对称加密算法</li>
-<li>SSL https协议<br>MD5 SHA  RSA 非对称加密<br>DES 对称加密<h2 id="META-INFO解析"><a href="#META-INFO解析" class="headerlink" title="META-INFO解析"></a>META-INFO解析</h2>manifest.mf 摘要文件  程序遍历APK包中所有的文件，对非文件夹、非签名的文件，逐个用SHA1生成摘要，再用Base64编码。若果你改变了apk包中文件，在安装校验时，改变后的文件摘要信息与manifest.mf的校验信息不用，就不能安装<br>说明：如果攻击者修改了程序的内容，有重新生成了新的摘要，那么就可以通过验证；</li>
-</ol>
-<p>cert.sf 对摘要的签名文件  对前一步生成的manifest.mf，使用sha1-rsa算法，用开发者的私钥进行签名，在安装时只有使用公钥才能解密，解密后与未加密的摘要信息进行对比，如果相符，则没有修改；<br>说明: 在这一步，即使开发者修改了程序内容，并生成了新的摘要文件，但是攻击者没有开发者的私钥，所以不能生成正确的签名文件（CERT.SF）。系统在对程序进行验证的时候，用开发者公钥对不正确的签名文件进行解密，得到的结果和摘要文件（MANIFEST.MF）对应不起来，所以不能通过检验，不能成功安装文件。</p>
-<p>cert.rsa 文件保存了公钥所采用的的加密算法等信息<br>说明：系统对签名文件进行解密，所需要的公钥就是从这个文件里取出来的。</p>
-
+        <h2 id="常见加密算法"><a href="#常见加密算法" class="headerlink" title="常见加密算法"></a>常见加密算法</h2>
+        
+          <a class="article-more-a" href="/2019/08/08/Android 加密解密/#more">more >></a>
+        
       
 
       
@@ -306,7 +300,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Android中Activity是如何启动的？"><a href="#Android中Activity是如何启动的？" class="headerlink" title="Android中Activity是如何启动的？"></a>Android中Activity是如何启动的？</h2><p> 用户在Laucher程序里点击应用图标时，会通知AMS(ActivityMangerService)启动应用的入口Activity，AMS发现这个应用未启动，则会通知zygote孵化出应用进程，然后在这个<br> 应用进程里执行ActivtiyThread的main方法。再该方法里会先准备好Looper和消息队列，然后调用attach方法将应用进程绑定到AMS，然后进入loop循环，不断从队列里读取消息</p>
-
+        
+          <a class="article-more-a" href="/2019/08/08/Android Activity/#more">more >></a>
+        
       
 
       
@@ -369,17 +365,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍:"></a>介绍:</h2><p>冷启动是指应用程序从头开始，之前从未打开过，首次启动</p>
-<h2 id="冷启动开始3个任务"><a href="#冷启动开始3个任务" class="headerlink" title="冷启动开始3个任务"></a>冷启动开始3个任务</h2><ol>
-<li>加载并启动程序</li>
-<li>启动后立即显示程序空白启动窗口</li>
-<li>创建应用程序进程</li>
-<li>启动主线程</li>
-<li>创建主Activity</li>
-<li>加载布局</li>
-<li>屏幕布局</li>
-<li>开始执行绘制<br>在第一次绘制后，系统进程会交换低当前显示的背景窗口，将其替换为主活动，用户使用。至此启动完成</li>
-</ol>
-
+        
+          <a class="article-more-a" href="/2019/08/06/Android冷启动/#more">more >></a>
+        
       
 
       
@@ -510,18 +498,10 @@ MersureSpace的值保存在一个int值挡中，一个int值有32位，前俩位
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="基础认知"><a href="#基础认知" class="headerlink" title="基础认知"></a>基础认知</h2><ol>
-<li>问: 事件分发的对象? 答：Touch事件</li>
-<li>问：事件分发本质？答:将点击事件传递到某个具体View</li>
-<li>问: 事件在那些对象间进行传递?答：Activity ViewGroup View</li>
-<li>问：事件分发过程方法？答：dispathchtouchEvent() oninterceptTouchEvent() 和 onTouchEvent()<h2 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h2><h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4>点击事件发生后，事件先传到Activity，然后到ViewGroup，最后到View<br>具体事件<h4 id="Activity的事件分发机制"><a href="#Activity的事件分发机制" class="headerlink" title="Activity的事件分发机制"></a>Activity的事件分发机制</h4><img src="https://upload-images.jianshu.io/upload_images/944365-e186b0edcb590546.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
-#### Viewgroup的事件分发机制
-<img src="https://upload-images.jianshu.io/upload_images/944365-ff627fea1a2244ad.png?imageMogr2/auto-orient/">
-#### View的事件分发机制
-<img src="https://upload-images.jianshu.io/upload_images/944365-762cf45f36858bbd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp">
-</li>
-</ol>
-
+        <h2 id="基础认知"><a href="#基础认知" class="headerlink" title="基础认知"></a>基础认知</h2>
+        
+          <a class="article-more-a" href="/2019/08/06/Android事件分发/#more">more >></a>
+        
       
 
       

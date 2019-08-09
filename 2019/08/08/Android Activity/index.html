@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Android中Activity是如何启动的？ 用户在Laucher程序里点击应用图标时，会通知AMS(ActivityMangerService)启动应用的入口Activity，AMS发现这个应用未启动，则会通知zygote孵化出应用进程，然后在这个 应用进程里执行ActivtiyThread的main方法。再该方法里会先准备好Looper和消息队列，然后调用attach方法将应用进程绑定到AM">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-08T12:44:22.283Z">
+<meta property="og:updated_time" content="2019-08-09T13:11:57.445Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Activity">
 <meta name="twitter:description" content="Android中Activity是如何启动的？ 用户在Laucher程序里点击应用图标时，会通知AMS(ActivityMangerService)启动应用的入口Activity，AMS发现这个应用未启动，则会通知zygote孵化出应用进程，然后在这个 应用进程里执行ActivtiyThread的main方法。再该方法里会先准备好Looper和消息队列，然后调用attach方法将应用进程绑定到AM">
@@ -175,7 +175,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Android中Activity是如何启动的？"><a href="#Android中Activity是如何启动的？" class="headerlink" title="Android中Activity是如何启动的？"></a>Android中Activity是如何启动的？</h2><p> 用户在Laucher程序里点击应用图标时，会通知AMS(ActivityMangerService)启动应用的入口Activity，AMS发现这个应用未启动，则会通知zygote孵化出应用进程，然后在这个<br> 应用进程里执行ActivtiyThread的main方法。再该方法里会先准备好Looper和消息队列，然后调用attach方法将应用进程绑定到AMS，然后进入loop循环，不断从队列里读取消息</p>
-
+<a id="more"></a>
       
 
       
