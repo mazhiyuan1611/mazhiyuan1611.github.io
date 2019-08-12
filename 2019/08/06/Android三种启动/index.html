@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>冷启动 | Hexo</title>
+  <title>三种启动 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="介绍:冷启动是指应用程序从头开始，之前从未打开过，首次启动">
+  <meta name="description" content="#冷启动 介绍:冷启动是指应用程序从头开始，之前从未打开过，首次启动">
 <meta property="og:type" content="article">
-<meta property="og:title" content="冷启动">
-<meta property="og:url" content="http://yoursite.com/2019/08/06/Android冷启动/index.html">
+<meta property="og:title" content="三种启动">
+<meta property="og:url" content="http://yoursite.com/2019/08/06/Android三种启动/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="介绍:冷启动是指应用程序从头开始，之前从未打开过，首次启动">
+<meta property="og:description" content="#冷启动 介绍:冷启动是指应用程序从头开始，之前从未打开过，首次启动">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-09T13:11:48.739Z">
+<meta property="og:updated_time" content="2019-08-12T07:03:27.376Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="冷启动">
-<meta name="twitter:description" content="介绍:冷启动是指应用程序从头开始，之前从未打开过，首次启动">
+<meta name="twitter:title" content="三种启动">
+<meta name="twitter:description" content="#冷启动 介绍:冷启动是指应用程序从头开始，之前从未打开过，首次启动">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -154,19 +154,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Android冷启动" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Android三种启动" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      冷启动
+      三种启动
     </h1>
   
 
         
-        <a href="/2019/08/06/Android冷启动/" class="archive-article-date">
+        <a href="/2019/08/06/Android三种启动/" class="archive-article-date">
   	<time datetime="2019-08-06T11:57:51.773Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-06</time>
 </a>
         
@@ -174,7 +174,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍:"></a>介绍:</h2><p>冷启动是指应用程序从头开始，之前从未打开过，首次启动</p>
+        <p>#冷启动</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍:"></a>介绍:</h2><p>冷启动是指应用程序从头开始，之前从未打开过，首次启动</p>
 <a id="more"></a>
 <h2 id="冷启动开始3个任务"><a href="#冷启动开始3个任务" class="headerlink" title="冷启动开始3个任务"></a>冷启动开始3个任务</h2><ol>
 <li>加载并启动程序</li>
@@ -184,7 +185,7 @@
 <li>创建主Activity</li>
 <li>加载布局</li>
 <li>屏幕布局</li>
-<li>开始执行绘制<br>在第一次绘制后，系统进程会交换低当前显示的背景窗口，将其替换为主活动，用户使用。至此启动完成</li>
+<li>开始执行绘制<br>在第一次绘制后，系统进程会交换低当前显示的背景窗口，将其替换为主活动，用户使用。至此启动完成<br>#热启动<br>##介绍:<br>应用程序的热启动要比冷启动简单的多，开销也更低，系统会把你的Activity带到前台，如果Activity还在内存中，那么应用程序就避免了重复对象初始化，布局加载，渲染。<br>系统为用户呈现空白屏幕，知道应用加载完呈现活动<br>#温启动<br>##介绍<br>温启动包含了冷启动时发生的一些操作;与此同时，它表示的开销比热启动少。有许多潜在的状态可以被认为是温暖的开始。<br>场景：<br>用户退出您的应用，但随后重新启动它。该过程可能已继续运行，但应用程序必须通过调用从头开始重新创建Activity 的onCreate()。<br>系统将您的应用程序从内存中逐出，然后用户重新启动它。需要重新启动进程和活动，但是在调用onCreate()的时候可以从Bundle（savedInstanceState）获取数据。<br>了解完启动过程，我们就知道哪里会影响我们启动的速度了。<br>在创建应用程序和创建Activity期间都可能会出现性能问题。</li>
 </ol>
 
       
@@ -265,7 +266,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/06/Android冷启动/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/06/Android三种启动/" alt="微信分享二维码">
     </div>
 </div>
 
