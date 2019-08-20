@@ -6,19 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Android加密解密 | Hexo</title>
+  <title>test | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="常见加密算法">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Android加密解密">
-<meta property="og:url" content="http://yoursite.com/2019/08/08/Android 加密解密/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="test">
+<meta property="og:url" content="http://yoursite.com/2019/08/20/test/test/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="常见加密算法">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-09T13:11:50.107Z">
+<meta property="og:image" content="http://yoursite.com/.com//2019-08-20-20-06-51.png">
+<meta property="og:updated_time" content="2019-08-20T12:07:50.928Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android加密解密">
-<meta name="twitter:description" content="常见加密算法">
+<meta name="twitter:title" content="test">
+<meta name="twitter:image" content="http://yoursite.com/.com//2019-08-20-20-06-51.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -154,37 +153,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Android 加密解密" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-test/test" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Android加密解密
+      test
     </h1>
   
 
         
-        <a href="/2019/08/08/Android 加密解密/" class="archive-article-date">
-  	<time datetime="2019-08-08T12:49:59.028Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-08</time>
+        <a href="/2019/08/20/test/test/" class="archive-article-date">
+  	<time datetime="2019-08-20T12:06:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="常见加密算法"><a href="#常见加密算法" class="headerlink" title="常见加密算法"></a>常见加密算法</h2><a id="more"></a>
-<ol>
-<li>MD5信息摘要算法</li>
-<li>SHA安全散列算法</li>
-<li>DES数据加密算法</li>
-<li>RSA非对称加密算法</li>
-<li>SSL https协议<br>MD5 SHA  RSA 非对称加密<br>DES 对称加密<h2 id="META-INFO解析"><a href="#META-INFO解析" class="headerlink" title="META-INFO解析"></a>META-INFO解析</h2>manifest.mf 摘要文件  程序遍历APK包中所有的文件，对非文件夹、非签名的文件，逐个用SHA1生成摘要，再用Base64编码。若果你改变了apk包中文件，在安装校验时，改变后的文件摘要信息与manifest.mf的校验信息不用，就不能安装<br>说明：如果攻击者修改了程序的内容，有重新生成了新的摘要，那么就可以通过验证；</li>
-</ol>
-<p>cert.sf 对摘要的签名文件  对前一步生成的manifest.mf，使用sha1-rsa算法，用开发者的私钥进行签名，在安装时只有使用公钥才能解密，解密后与未加密的摘要信息进行对比，如果相符，则没有修改；<br>说明: 在这一步，即使开发者修改了程序内容，并生成了新的摘要文件，但是攻击者没有开发者的私钥，所以不能生成正确的签名文件（CERT.SF）。系统在对程序进行验证的时候，用开发者公钥对不正确的签名文件进行解密，得到的结果和摘要文件（MANIFEST.MF）对应不起来，所以不能通过检验，不能成功安装文件。</p>
-<p>cert.rsa 文件保存了公钥所采用的的加密算法等信息<br>说明：系统对签名文件进行解密，所需要的公钥就是从这个文件里取出来的。</p>
-
+        <img src="/.com//2019-08-20-20-06-51.png">
       
 
       
@@ -263,7 +252,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/08/Android 加密解密/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/20/test/test/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -277,7 +266,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/20/test/test/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/08/20/test/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -287,8 +276,8 @@
     </a>
   
   
-    <a href="/2019/08/08/Android Service/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Android Service</div>
+    <a href="/2019/08/08/Android 加密解密/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android加密解密</div>
       <i class="icon-circle-right"></i>
     </a>
   
